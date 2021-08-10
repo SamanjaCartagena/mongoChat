@@ -17,7 +17,8 @@
           <div class="row">
               <div class="col-md-6 offset-md-3-sm-12">
                   <h1 class="text-center">Mongo Chat
-                 <button id="clear" class="btn btn-danger">Clear</button>
+
+                 
                   </h1>
                   <div id="status">
                   </div>
@@ -47,7 +48,7 @@
              var messages = element('messages');
              var textarea = element('textarea');
              var username = element('username');
-             var clearBtn = element('clear');
+            // var clearBtn = element('clear');
 
              //Set default status
              var statusDefault = status.textContent;
@@ -106,12 +107,12 @@
                 }
             })
             //Handle chat clear
-            clearBtn.addEventListener('click', function(){
-                socket.emit('clear');
-            });
+          //  clearBtn.addEventListener('click', function(){
+            //    socket.emit('clear');
+            //});
 
             //Clear message
-            socket.on('cleared', function(){
+           socket.on('cleared', function(){
                 messages.textContent='';
             });
 

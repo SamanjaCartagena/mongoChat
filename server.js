@@ -59,14 +59,14 @@ mongo.connect(url, function(err, db) {
          }
         });
       //Handle clear
-      socket.on('clear',function(data){
+    //  socket.on('clear',function(data){
           //Remove all chats from collection
-          dbo.collection("chats").remove({}, function(){
+      //    dbo.collection("chats").remove({}, function(){
               //Emit cleared
-              socket.emit('cleared');
-          });
+        //      socket.emit('cleared');
+          //});
 
-      });
+      //});
       
 
     });
