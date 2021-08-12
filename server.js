@@ -1,9 +1,34 @@
 const express = require('express');
+const http= require('http');
+const fs = require('fs');
 const cors= require('cors');
+const port=4000;
 const app = express();
 app.use(cors());
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io')(4000).sockets;
+const server= http.createServer(function(req,res){
+  res.writeHead(200,{'Content-Type':'text/html'})
+  fs.readFile('index.html', function(error,data){
+      if(error){
+          res.writeHead(404)
+          res.write('Error: File not found')
+      }else{
+          res.write(data)
+          console.log('Reading the index file');
+      }
+      res.end()
+  })
+
+})
+server.listen(port, function(error){
+  if(error){
+      console.log('Something went wrong', error)
+  }
+  else{
+      console.log('Server is listening on port '+port);
+  }
+})
+ const client = require('socket.io')(server).sockets;
 
 
 //Connect to mongo
@@ -11,7 +36,7 @@ var url = "mongodb://localhost:27017/";
 
 mongo.connect(url, function(err, db) {
   if (err) throw err;
-  var dbo = db.db("astoriaChats");
+  var dbo = db.db("mongochatcluster");
  let chat= dbo.createCollection("chats", function(err, res) {
     if (err) throw err;
     console.log("Collection created!");
