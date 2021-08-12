@@ -63,7 +63,12 @@
              }
 
              //Connect to socket.io
-             var socket = io.connect('http://localhost:4000');
+             var socket = io.connect('http://localhost:4000',{
+                 cors:{
+                     origin:"http://localhost:4000",
+                     methods:["GET","POST"]
+                 }
+             });
           console.log("connected to socket.io");
            if(socket !== undefined){
                console.log('Connected to socket...');
